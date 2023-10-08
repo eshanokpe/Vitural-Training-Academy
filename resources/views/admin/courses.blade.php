@@ -16,6 +16,7 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Course Image</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Course Video</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Course Title</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Prices</th>
@@ -29,7 +30,21 @@
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
-                              <img src="{{ asset('assets/' .$course->image_path) }}"  alt="{{$course->image_path}}" class="avatar avatar-sm me-3">
+                              <img src="{{ asset('assets/' .$course->image_path) }}"  alt="{{$course->image_path}}" class=" avatar-sm me-3">
+                            </div>
+                           
+                          </div>
+                        </td>
+                        <td>
+                          <div class="d-flex px-2 py-1">
+                            <div>
+                             
+                              <video controls width="100%" height="auto">
+                                  @foreach (['mp4', 'webm', 'ogg','mkv'] as $format)
+                                      <source src="{{ asset('assets/'.$course->course_video . '.' . $format) }}" type="video/{{ $format }}">
+                                  @endforeach
+                                  Your browser does not support the video tag.
+                              </video>
                             </div>
                            
                           </div>
@@ -41,13 +56,15 @@
                         </td> 
                         <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <p class="text-xs font-weight-bold mb-0">{{$course->description}}</p>
+                            <p class="text-xs font-weight-bold mb-0">
+                              {{ substr($course->description, 0, 20) }}  
+                            </p>
                           </div>
                         </td>
                         <td>
                           <div class="d-flex flex-column justify-content-center">
                             <p class="text-xs font-weight-bold mb-0">{{$course->new_price}}</p>
-                            <small class="text-xs font-weight-bold mb-0">{{$course->sale_price}}</small>
+                            <small style="text-decoration: line-through;" class="text-xs font-weight-bold mb-0">{{$course->sale_price}}</small>
                             <small class="text-xs font-weight-bold mb-0">{{$course->discount}}%</small>
 
                           </div>
@@ -58,17 +75,18 @@
                           </div>
                         </td>
                         <td class="align-middle text-center">
-                          <a href="" class="text-secondary font-weight-bold text-xs editDriverBtn" data-toggle="modal" data-target="#editDriverModal" data-id="{{$course->id}}">
+                          <a href="{{ route('courses.edit', $course->id) }}" class="text-secondary font-weight-bold text-xs editDriverBtn" >
                             <i class="material-icons opacity-10 text-info">edit</i>
                           </a>
-                          <a href="" class="text-secondary font-weight-bold text-xs deleteDriverBtn" data-toggle="modal" data-target="#deleteDriverModal" data-id="{{$course->id}}">
-                            <i class="material-icons opacity-10 text-danger">delete</i>
+                          <a href="{{ route('courses.delete', $course->id) }}" class="text-secondary font-weight-bold text-xs deleteDriverBtn" onclick="return confirm('Are you sure you want to delete this course?')">
+                              <i class="material-icons opacity-10 text-danger">delete</i>
                           </a>
+                        
                         </td>
                       </tr>
                     @endforeach
                   </tbody>
-                </table>
+                </table> 
               </div>
             @else
               <div class="text-center">No Courses found!</div>

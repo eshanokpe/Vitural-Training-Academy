@@ -3,6 +3,7 @@
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\VehiclesController;
 use App\Http\Controllers\DestinationsController;
 use Illuminate\Support\Facades\Auth;
@@ -39,10 +40,17 @@ Route::delete('/users/{user}', [UsersController::class, 'destroy']);
 Route::get('/courses', [CoursesController::class, 'index']);
 Route::post('/courses', [CoursesController::class, 'store']);
 Route::get('/courses/download/{id}', [CoursesController::class, 'downloadMaterial'])->name('courses.download');
-Route::get('/courses/{driver}/edit', [CoursesController::class, 'edit']);
-Route::get('/courses/{driver}/showToRemove', [CoursesController::class, 'showToRemove']);
-Route::put('/courses/{driver}', [CoursesController::class, 'update']);
-Route::delete('/courses/{driver}', [CoursesController::class, 'destroy']);
+Route::get('/courses/{id}/showToRemove', [CoursesController::class, 'showToRemove']);
+Route::put('/courses/{course}', [CoursesController::class, 'update'])->name('courses.update');
+Route::get('/courses/{course}/delete', [CoursesController::class, 'destroy'])->name('courses.delete');
+Route::get('/courses/{id}/edit', [CoursesController::class, 'edit'])->name('courses.edit');
+
+//Categories route'
+Route::get('/categories', [CategoriesController::class, 'index']);
+Route::post('/categories', [CategoriesController::class, 'store']);
+Route::put('/category/{category}', [CategoriesController::class, 'update'])->name('category.update');
+Route::get('/category/{category}/delete', [CategoriesController::class, 'destroy'])->name('category.delete');
+Route::get('/category/{id}/edit', [CategoriesController::class, 'edit'])->name('category.edit');
 
 // Vehicle routes
 Route::get('/vehicles', [VehiclesController::class, 'index']);

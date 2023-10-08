@@ -53,68 +53,9 @@ class CargosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        // return $request;
+   
 
-        $data = $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'nature' => ['required', 'string'],
-            'weight' => ['required'],
-            'destination_id' => ['required'],
-            'amount' => ['required'],
-        ], [], [
-            'destination_id' => 'destination',
-        ]);
-
-        $tripsController = new TripsController();
-
-        $cargo = new CargoBooking();
-        $cargo->name = $data['name'];
-        $cargo->nature = $data['nature'];
-        $cargo->weight = $data['weight'];
-        $cargo->user_id = auth()->user()->id;
-        $cargo->destination_id = $data['destination_id'];
-        $cargo->amount = $data['amount'];
-        $cargo->delivery_date = Carbon::now()->addDay();
-        $cargo->ticket_no = $tripsController->generateUniqueTicketNumber();
-        $cargo->save();
-
-        $ticket = CargoBooking::latest()->first();
-
-        // Redirect to payment view with ticket id
-        return redirect("/pay_paystack/cargo/" . $ticket->id);
-    }
-
-    /**
-     * Store a newly created cargo ticket in storage.
-     *
-     * @param  array $data
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function calculateCargoAmount($nature, $weight, $id)
-    {
-        // $amount = $nature.' '.$weight.' '.$id; //! Test Case
-
-        $amount = Destination::find($id)->amount;
-
-        // check nature of cargo
-        if ($nature == 'Fragile') {
-            $amount += 200;
-        }
-
-        // check weight of cargo
-        if ($weight > 5) {
-            $cost_weight = $weight - 5;
-            $amount += $cost_weight * 100;
-        }
-
-        $data = [
-            'amount' => $amount,
-        ];
-
-        return view('passenger.plugins.cargo_amount')->with($data);
-    }
+  
 
     /**
      * Display the specified resource.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -31,7 +32,9 @@ class CoursesController extends Controller
             return redirect('/dashboard')->with('error', 'Unauthorized Page');
         }
         
-        $courses = Course::orderBy('created_at', 'desc')->get();
+        $courses = Course::orderBy('created_at', 'desc')
+        ->take(10)
+        ->get();
                
         return view('admin.courses')->with('courses', $courses);
     }
@@ -82,7 +85,7 @@ class CoursesController extends Controller
 
             // Use Intervention Image to resize and save the image to the public directory
             $image = Image::make($uploadedImage->getRealPath());
-            $image->resize(300, 200); // You can customize the size as per your requirements
+            $image->resize(800, 800); // You can customize the size as per your requirements
             $image->save(public_path('assets/course_images/' . $imagePath)); // Save the image to the public/images directory
     
         }
@@ -107,7 +110,7 @@ class CoursesController extends Controller
         $course->image_path = 'course_images/'.$imagePath;
         $course->material_path = 'course_materials/' .$materialPath;
         $course->course_video = 'course_video/'. $videoPath;
-        $course->discount = (($request->new_price - $request->sale_price) / $request->price) * 100;
+        $course->discount = (($request->new_price - $request->sale_price) / $request->new_price) * 100;
             
 
         $course->save();
@@ -153,9 +156,10 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        $driver = Driver::find($id);
-        
-        return view('admin.modify.edit_driver')->with('driver', $driver);
+        $course = Course::find($id);
+        $categories = Category::all();
+        return view('admin.modify.edit_course', compact('course', 'categories') );
+       // return view('admin.courses')->with('course', $course);
     }
 
     /**
@@ -174,31 +178,65 @@ class CoursesController extends Controller
             return redirect('/dashboard')->with('error', 'Unauthorized Page');
         }
         
-        // Validate request details
-        $data = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'dob' => 'required|string|date|before:'.Carbon::today(),
-            'address' => 'required|string|max:255',
-            'phone_number' => 'required',
-            'state' => 'required|string|max:255',
-            'lga' => 'required|string|max:255',
-            'experience' => 'required',
-        ]);
+        // Validate the form data
+       
         
+         // Handle file uploads
+         $imagePath = null;
+         $materialPath = null;
+ 
+       
+         
         // Add new driver to dbase
-        $driver = Driver::find($id);
-        $driver->first_name = $data['first_name'];
-        $driver->last_name = $data['last_name'];
-        $driver->dob = $data['dob'];
-        $driver->address = $data['address'];
-        $driver->phone_number = $data['phone_number'];
-        $driver->state = $data['state'];
-        $driver->lga = $data['lga'];
-        $driver->experience = $data['experience'];
-        $driver->update();
+        $course = Course::find($id);
+        $course->title = $request->input('title');
+        $course->description = $request->input('description');
+        $course->new_price = $request->input('new_price');
+        $course->sale_price = $request->input('sale_price');
+        $course->category = $request->input('category');
+        $course->discount = (($request->new_price - $request->sale_price) / $request->new_price) * 100;
+        $course->update();
+         // Handle image upload
+       
+
+        if ($request->hasFile('image')) {
+             // Get the uploaded file from the request
+            $uploadedImage = $request->file('image');
+
+            // Generate a unique name for the image using a timestamp and original extension
+            $imagePath = time() . '.' . $uploadedImage->getClientOriginalExtension();
+
+            // Use Intervention Image to resize and save the image to the public directory
+            $image = Image::make($uploadedImage->getRealPath());
+            $image->resize(800, 800); // You can customize the size as per your requirements
+            $image->save(public_path('assets/course_images/' . $imagePath)); // Save the image to the public/images directory
+            $course->image_path = 'course_images/'.$imagePath;
+            $course->save();
+        }
+
+
+        // Handle course material upload
+        if ($request->hasFile('course_material')) {
+            $document = $request->file('course_material');
+            $materialPath = time() . '.' . $document->getClientOriginalExtension();
+    
+            // Move the uploaded document to the public/assets/documents directory
+           // $documentPath = public_path('assets/course_materials/' . $materialPath);
+            $document->move(public_path('assets/course_materials'), $materialPath);
+            $course->material_path =  'course_materials/' .$materialPath;
+            $course->save();
+        }
+
+        // Handle course video upload
+        if ($request->hasFile('course_video')) {
+            $videoPath = $request->file('course_video')->store('course_videos', 'public');
+            // Update the course's video path in the database as needed
+            $course->course_video = 'course_video/'. $videoPath;
+            $course->save();
+        }
         
-        return redirect('/courses')->with('success', 'Driver details updated!');
+        
+        return redirect('/courses')->with('success', 'Course details updated!');
     }
 
     /**
@@ -219,6 +257,6 @@ class CoursesController extends Controller
         $course = Course::find($id);
         $course->delete();
         
-        return redirect('/drivers')->with('success', 'Driver Removed!');
+        return redirect('/courses')->with('success', 'Course Removed!');
     }
 }

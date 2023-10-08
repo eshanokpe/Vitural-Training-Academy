@@ -15,7 +15,7 @@ class Course extends Model
         'sale_price',
         'discount',
         'category',
-        'image',
+        'image_path',
         'course_material',
         'course_video',
         'thumbnailPath',

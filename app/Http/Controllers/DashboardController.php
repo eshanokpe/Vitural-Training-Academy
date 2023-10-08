@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Models\CargoBooking;
+use App\Models\Course;
 use App\Models\Destination;
 use App\Models\Driver;
 use App\Models\User;
@@ -37,11 +37,11 @@ class DashboardController extends Controller
         $vehicles = Vehicle::all();
         $destinations = Destination::all();
         $dailyTickets = Booking::whereDate('created_at', Carbon::today())->get();
-        $dailyCargos = CargoBooking::whereDate('created_at', Carbon::today())->get();
+        $dailyCargos = Course::whereDate('created_at', Carbon::today())->get();
         $administrators = User::where('type', 1)->get();
-        $cargos = CargoBooking::all();
+        $courses = Course::all();
         $tickets = Booking::latest()->paginate(5);
-        $cargo_tickets = CargoBooking::latest()->paginate(5);
+        $cargo_tickets = Course::latest()->paginate(5);
         $userTickets = $user->bookings;
         $userTicketsBookedToday = $user->bookings()->whereDate('created_at', Carbon::today())->get();
         
@@ -49,9 +49,7 @@ class DashboardController extends Controller
             $ticket->user->full_name = $ticket->user->first_name.' '.$ticket->user->middle_name.' '.$ticket->user->last_name;
         }
 
-        foreach ($cargo_tickets as $ticket) {
-            $ticket->user->full_name = $ticket->user->first_name.' '.$ticket->user->middle_name.' '.$ticket->user->last_name;
-        }
+       
         
         $adminData = [
             'drivers' => $drivers,
@@ -61,9 +59,8 @@ class DashboardController extends Controller
             'dailyCargos' => $dailyCargos,
             'passengers' => $passengers,
             'administrators' => $administrators,
-            'cargos' => $cargos,
+            'courses' => $courses,
             'tickets' => $tickets,
-            'cargo_tickets' => $cargo_tickets,
         ];
         
         // Modify $userTickets

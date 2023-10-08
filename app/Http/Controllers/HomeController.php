@@ -33,18 +33,17 @@ class HomeController extends Controller
     }
    
     public function courseDetails($id){
-       // $courses = Course::where('id', $id)->first();
-       $course = Course::find($id);
+        $courses = Course::inRandomOrder()
+                        ->latest()
+                        ->take(10)
+                        ->get();
+        $course = Course::find($id);
+        $title =  $course->titile;
 
-       // return view('coursedetails', compact('courses'))->with('title', $courses->title);
-        // Check if the course was found
-        //dd($courses);
+        // dd($courses);
         if ($course) {
-            // Course found, you can use $course to access its details
-            return view('course.details', ['course' => $course]);
-           // return view('course.details', )->with('course', $course);
+            return view('course.details', compact('course','title','courses'));
         } else {
-            // Course not found, handle the error (e.g., show a 404 page)
             abort(404);
         }
     }

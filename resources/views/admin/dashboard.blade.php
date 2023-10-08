@@ -107,23 +107,7 @@
             </div>
           </div>
         </div>
-        {{-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">
-                <i class="fas fa-truck text-white" style="font-size:1.4em;margin-top:1.3rem;"></i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize"> Total Cargos</p>
-                <h4 class="mb-0">{{ $cargos->count() }}</h4>
-              </div>
-            </div> 
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
-            </div>
-          </div>
-        </div>--}}
+       
         <div class="col-xl-3 col-sm-6">
           <div class="card">
             <div class="card-header p-3 pt-2">
@@ -138,6 +122,23 @@
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
               <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-warning shadow-warning text-center border-radius-xl mt-n4 position-absolute">
+                <i class="fas fa-books text-white" style="font-size:1.4em;margin-top:1.3rem;"></i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize"> Total Courses</p>
+                <h4 class="mb-0">{{ $courses->count() }}</h4>
+              </div>
+            </div> 
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{ $courses->count() }} </span> courses</p>
             </div>
           </div>
         </div>
@@ -213,74 +214,7 @@
               </div>
             </div>
           </div>
-          <div class="card mt-2">
-            <div class="card-header p-0" id="headingOne">
-              <h2 class="mb-0">
-                <a class="btn btn-link" type="button" data-toggle="collapse" data-target="#cargosDIV" aria-expanded="true" aria-controls="cargosDIV">
-                  <span class="text-bold text-md letter-spacing-2">Cargos</span>
-                </a>
-              </h2>
-            </div>
-        
-            <div class="collapse show" id="cargosDIV" aria-labelledby="headingOne" data-parent="#ticketsAccordion">
-              <div class="card-body px-4 pb-2">
-                <div class="bg-gradient-light shadow-light border-radius-lg pt-4 pb-3 d-flex p-4 justify-content-between">
-                  <h6 class="text-capitalize w-100">Cargo Bookings</h6>
-                  <button class="btn btn-sm btn-primary col-sm-2" data-toggle="modal" data-target="#payTicketModal"><i class="fas fa-ticket-alt"></i> Pay for ticket</button>
-                </div>
-                  @if (count($cargo_tickets) > 0)
-                  <div class="table-responsive p-0">
-                      <table class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ticket No</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Passenger</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Booked On</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Destination</th>
-                              <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Delivery date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($cargo_tickets as $ticket)
-                            <tr>
-                              <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm"><i class="fas fa-drone"></i> {{$ticket->ticket_no}}</h6>
-                                    </div>
-                                </div>
-                              </td>
-                                <td>
-                                  <div class="d-flex px-2 py-1">
-                                      <div class="d-flex flex-column justify-content-center">
-                                          <h6 class="mb-0 text-sm">{{$ticket->user->full_name}}</h6>
-                                          <p class="text-xs text-secondary mb-0">{{$ticket->user->phone_number}}</p>
-                                      </div>  
-                                  </div>
-                                </td>
-                                <td>
-                                  <h6 class="mb-0 text-sm">{{$ticket->created_at->format('D jS M\, Y')}}</h6>
-                                </td>
-                                <td class="text-sm">
-                                    <h6 class="text-sm font-weight-bold mb-0">{{$ticket->destination->name}}</h6>
-                                </td>
-                                <td class="text-sm">
-                                    <h6 class="text-sm font-weight-bold mb-0">{{Carbon\Carbon::create($ticket->delivery_date)->format('D jS M\, Y')}}</h6>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                      </table>
-                      <div class="d-flex justify-content-center mt-2">
-                        {{ $cargo_tickets->links() }}
-                      </div>
-                  </div>
-                  @else
-                      <div class="text-center">No cargo ticket found!</div>
-                  @endif
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
       

@@ -10,12 +10,8 @@
                 <div class="row">
                     <div class="col-xl-7 col-lg-9">
                         <div class="slider-cont">
-                            <h1 data-animation="fadeInLeft" daStack(
-								children: [
-									
-								]
-							)ta-delay="1s">Choose the right theme for education</h1>
-                            <p data-animation="fadeInUp" data-delay="1.3s">Donec vitae sapien ut libearo venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt  Sed fringilla mauri amet nibh.</p>
+                            <h1 data-animation="fadeInLeft" data-delay="1s">Welcome to Virtual Academic Training</h1>
+                            <p data-animation="fadeInUp" data-delay="1.3s">Unlock the world of knowledge and learning..</p>
                             <ul>
                                 <li><a data-animation="fadeInUp" data-delay="1.6s" class="main-btn" href="#">Read More</a></li>
                                 <li><a data-animation="fadeInUp" data-delay="1.9s" class="main-btn" href="#">Get Started</a></li>
@@ -31,8 +27,8 @@
                 <div class="row">
                     <div class="col-xl-7 col-lg-9">
                         <div class="slider-cont">
-                            <h1 data-animation="fadeInLeft" data-delay="1s">Choose the right theme for education</h1>
-                            <p data-animation="fadeInUp" data-delay="1.3s">Donec vitae sapien ut libearo venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt  Sed fringilla mauri amet nibh.</p>
+                            <h1 data-animation="fadeInLeft" data-delay="1s">Learn Anytime, Anywhere</h1>
+                            <p data-animation="fadeInUp" data-delay="1.3s">Our platform is accessible on all devices.</p>
                             <ul>
                                 <li><a data-animation="fadeInUp" data-delay="1.6s" class="main-btn" href="#">Read More</a></li>
                                 <li><a data-animation="fadeInUp" data-delay="1.9s" class="main-btn" href="#">Get Started</a></li>
@@ -47,8 +43,8 @@
                 <div class="row">
                     <div class="col-xl-7 col-lg-9">
                         <div class="slider-cont">
-                            <h1 data-animation="fadeInLeft" data-delay="1s">Choose the right theme for education</h1>
-                            <p data-animation="fadeInUp" data-delay="1.3s">Donec vitae sapien ut libearo venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt  Sed fringilla mauri amet nibh.</p>
+                            <h1 data-animation="fadeInLeft" data-delay="1s">Expert Instructors</h1>
+                            <p data-animation="fadeInUp" data-delay="1.3s">Learn from the best in the field.</p>
                             <ul>
                                 <li><a data-animation="fadeInUp" data-delay="1.6s" class="main-btn" href="#">Read More</a></li>
                                 <li><a data-animation="fadeInUp" data-delay="1.9s" class="main-btn" href="#">Get Started</a></li>
@@ -216,47 +212,98 @@
     
     <!--====== APPLY PART ENDS ======-->
    
-    <!--====== COURSE PART START ======-->
+  
+     <!--====== PUBLICATION PART START ======-->
     
-    <section id="course-part" class="pt-115 pb-120 gray-bg">
+     <section id="publication-part" class="pt-115 pb-120 gray-bg">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="section-title pb-45">
+            <div class="row align-items-end">
+                <div class="col-lg-6 col-md-8 col-sm-7">
+                    <div class="section-title pb-60">
                         <h5>Our course</h5>
                         <h2> courses </h2>
                     </div> <!-- section title -->
                 </div>
+                <div class="col-lg-6 col-md-4 col-sm-5">
+                    <div class="products-btn text-right pb-60">
+                        <a href="{{route('user.courses')}}" class="main-btn">All Courses</a>
+                    </div> <!-- products btn -->
+                </div>
             </div> <!-- row -->
-            <div class="row course-slide mt-30">
-				@foreach ($courses as $course)
-					<div class="col-lg-4">
-						<div class="single-course">
-							<div class="thum">
-								<div class="image">
-									<img src="{{ asset('assets/' .$course->image_path) }}" alt="Course">
-								</div>
-								<div class="price">
-									<span>{{ $course->discount}}%</span>
-								</div>
-							</div>
-							<div class="cont">
-								<ul>
-									<li><h4>₦{{$course->new_price}}</h4></li>
-								</ul>
-								<span style="text-decoration: line-through;">₦{{$course->sale_price}}</span><br>
-								<a href="courses-single.html"><h4>{{$course->title}}</h4></a>
-								
-							</div>
-						</div> <!-- single course -->
-					</div>
-				@endforeach
-            </div> <!-- course slide -->
+            <div class="row justify-content-center">
+                @foreach ($courses as $course)
+                    {{-- <div class="col-lg-3 col-md-6 col-sm-8">
+                        <div class="single-course">
+                            <div class="thum">
+                                <div class="image">
+                                    <img src="{{ asset('assets/' .$course->image_path) }}" alt="Course">
+                                </div>
+                                <div class="price">
+                                    <span>Free</span>
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <ul>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                </ul>
+                                <span>(20 Reviews)</span>
+                                <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
+                                <div class="course-teacher">
+                                    <div class="thum">
+                                        <a href="#"><img src="images/course/teacher/t-1.jpg" alt="teacher"></a>
+                                    </div>
+                                    <div class="name">
+                                        <a href="#"><h6>Mark anthem</h6></a>
+                                    </div>
+                                    <div class="admin">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
+                                            <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- single course -->
+                    </div> --}}
+                    <div class="col-lg-3 col-md-6 col-sm-8">
+                        <div class="single-publication mt-30 text-center">
+                            <div class="image">
+                                <img src="{{ asset('assets/' .$course->image_path) }}" alt="Publication">
+                                <div class="add-cart">
+                                    <ul>
+                                        <li><a href="{{route('courses-details', $course->id)}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        {{-- <li><a href="#"><i class="fa fa-heart-o"></i></a></li> --}}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="content pt-10">
+                                <h5 class="book-title"><a href="{{route('courses-details', $course->id)}}">{{$course->title}}</a></h5>
+                                <p class="writer-name"><span></span>
+                                    {{ substr($course->description, 0, 70) }} ...   
+                                <p>
+                                <div class="price-btn d-flex align-items-center justify-content-between">
+                                    <div class="price pt-20">
+                                        <span class="discount-price">₦{{$course->sale_price}}</span>
+                                        <span class="normal-price">₦{{$course->new_price}}</span>
+                                    </div>
+                                    <div class="button pt-10">
+                                        <a href="{{route('courses-details', $course->id)}}" class="main-btn">
+                                            <i class="fa fa-cart-plus"></i> Buy Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- single publication -->
+                    </div>
+                @endforeach
+               
+            </div> <!-- row -->
         </div> <!-- container -->
     </section>
     
-    <!--====== COURSE PART ENDS ======-->
-   
-    <!--====== FOOTER PART START ======-->
+    <!--====== PUBLICATION PART ENDS ======-->
 @endsection
    

@@ -23,25 +23,6 @@ The objectives are:
 
 This project was built with Laravel 8.68.1
 
-## Features
-The current features supported include:
-- User (Passenger and Admin)
-- Booking of bus seats
-- Cargo booking
-- Driver
-- Vehicle
-- Ticket number
-- Barcode
-- Payment System - [Paystack](https://paystack.com/)
-#### **Planned Features**
-- Automatic deleting of tickets unpaid after 1 month (with cronjobs)
-
-## Installation
-
-#### Clone the repo
-```bash
-git clone https://github.com/sixtusagbo/transport_management_system
-```
 
 #### Duplicate and modify [.env.example](https://github.com/sixtusagbo/transport_management_system/blob/main/.env.example)
 ```bash

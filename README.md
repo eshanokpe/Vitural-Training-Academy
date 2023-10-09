@@ -10,8 +10,6 @@ The objectives are:
 
 [![License](https://img.shields.io/github/license/sixtusagbo/transport_management_system)](LICENSE)
 
-![Screenshot](https://raw.githubusercontent.com/sixtusagbo/transport_management_system/main/screenshot.png)
-
 ## Table of Content
 * [Overview](#transport-management-system)
 * [Framework](#framework)

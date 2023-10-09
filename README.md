@@ -1,10 +1,14 @@
-# Transport Management System
+# Virtual Training Academic
 
-A transport management system that takes care of booking and payment of tickets, auto assignment of seat number and more.
+The aims of this research are to streamline operations, enhance communication, and provide a user-friendly platform for students and staff to access crucial information. 
+The objectives are:
+1.	To create a centralized platform for the academy to manage student enrollments, course scheduling, and progress tracking.
+2.	To assure that students meet the current trend in academic settings all over the world
+3.	To provide the students with all the information needed in any subject that is done at Hair Kulture Academy.
+4.	To Create a platform for student to engage in self-paces learning
+
 
 [![License](https://img.shields.io/github/license/sixtusagbo/transport_management_system)](LICENSE)
-
-![Screenshot](https://raw.githubusercontent.com/sixtusagbo/transport_management_system/main/screenshot.png)
 
 ## Table of Content
 * [Overview](#transport-management-system)
@@ -17,25 +21,6 @@ A transport management system that takes care of booking and payment of tickets,
 
 This project was built with Laravel 8.68.1
 
-## Features
-The current features supported include:
-- User (Passenger and Admin)
-- Booking of bus seats
-- Cargo booking
-- Driver
-- Vehicle
-- Ticket number
-- Barcode
-- Payment System - [Paystack](https://paystack.com/)
-#### **Planned Features**
-- Automatic deleting of tickets unpaid after 1 month (with cronjobs)
-
-## Installation
-
-#### Clone the repo
-```bash
-git clone https://github.com/sixtusagbo/transport_management_system
-```
 
 #### Duplicate and modify [.env.example](https://github.com/sixtusagbo/transport_management_system/blob/main/.env.example)
 ```bash

@@ -128,8 +128,9 @@
                       <label class="control-label">Course Category</label>
                       <select name="category"  class="form-control border ps-2" required>
                         <option value="" selected="selected">- Select -</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Science">Science</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->name }}" {{ $category->name }}>  </option>
+                        @endforeach
                       </select>
                     </div>
 
@@ -141,13 +142,13 @@
 
                     <div class="form-group ">
                         <label class="control-label">Upload Course Material</label>
-                        <input type="file" name="course_material" class="form-control border ps-2" required>
+                        <input type="file" name="course_material" class="form-control border ps-2" >
                     </div>
                     <small class="text-danger mb-2">You can upload PDFs, documents, or presentaions</small>
 
                     <div class="form-group">
                       <label for="video" class="control-label">Select Video:</label>
-                      <input type="file" name="course_video" id="course_video" accept=".mp4, .avi, .mpeg, .mov" class="form-control border ps-2" required>
+                      <input type="file" name="course_video" id="course_video" accept=".mp4, .avi, .mpeg, .mov" class="form-control border ps-2" >
                     </div>
                     <small class="text-danger mb-2">You can upload Video</small>
 

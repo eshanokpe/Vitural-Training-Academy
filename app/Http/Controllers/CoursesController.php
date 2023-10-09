@@ -35,8 +35,9 @@ class CoursesController extends Controller
         $courses = Course::orderBy('created_at', 'desc')
         ->take(10)
         ->get();
+        $categories = Category::all();
                
-        return view('admin.courses')->with('courses', $courses);
+        return view('admin.courses')->compact('courses', 'categories');
     }
 
     /**

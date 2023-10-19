@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -39,10 +40,11 @@ class HomeController extends Controller
                         ->get();
         $course = Course::find($id);
         $title =  $course->titile;
+        $categories = Category::all();
 
         // dd($courses);
         if ($course) {
-            return view('course.details', compact('course','title','courses'));
+            return view('course.details', compact('course','title','courses', 'categories'));
         } else {
             abort(404);
         }

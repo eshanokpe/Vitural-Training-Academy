@@ -38,13 +38,17 @@
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
-                             
+                              @if ($course->course_video == 'course_video/')
+                                <p class="text-danger"> No Video selected</p>
+                              @else
+                            
                               <video controls width="100%" height="auto">
                                   @foreach (['mp4', 'webm', 'ogg','mkv'] as $format)
-                                      <source src="{{ asset('assets/'.$course->course_video . '.' . $format) }}" type="video/{{ $format }}">
+                                      <source src="{{ asset($course->course_video) }}" type="video/{{ $format }}">
                                   @endforeach
                                   Your browser does not support the video tag.
                               </video>
+                              @endif
                             </div>
                            
                           </div>
@@ -63,15 +67,19 @@
                         </td>
                         <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <p class="text-xs font-weight-bold mb-0">{{$course->new_price}}</p>
-                            <small style="text-decoration: line-through;" class="text-xs font-weight-bold mb-0">{{$course->sale_price}}</small>
+                            <p class="text-xs font-weight-bold mb-0">₦{{ number_format($course->new_price) }}</p>
+                            <small style="text-decoration: line-through;" class="text-xs font-weight-bold mb-0">₦{{ number_format($course->sale_price) }}</small>
                             <small class="text-xs font-weight-bold mb-0">{{$course->discount}}%</small>
 
                           </div>
                         </td>
                         <td>
                           <div class="d-flex flex-column justify-content-center">
-                            <a href="{{ route('courses.download', $course->id) }}" class="btn btn-success">Download Material</a>
+                            @if ($course->material_path == 'course_materials/')
+                            <p class="text-danger"> No Material selected</p>
+                            @else
+                            <a href="{{ route('courses.download', $course->material_path) }}" class="btn btn-success">Download Material</a>
+                            @endif
                           </div>
                         </td>
                         <td class="align-middle text-center">
@@ -129,7 +137,7 @@
                       <select name="category"  class="form-control border ps-2" required>
                         <option value="" selected="selected">- Select -</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->name }}" {{ $category->name }}>  </option>
+                            <option value="{{ $category->name }}"> {{ $category->name }}  </option>
                         @endforeach
                       </select>
                     </div>

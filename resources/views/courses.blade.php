@@ -27,30 +27,39 @@
         <div class="row">
             
         </div> <!-- row -->
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content" id="myTabContent"> 
           <div class="tab-pane fade show active" id="courses-grid" role="tabpanel" aria-labelledby="courses-grid-tab">
-                <div class="row">
+            <div class="row justify-content-start">
                     @forelse ($courses as $course)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-course mt-30">
-                            <div class="thum">
+                        <div class="col-lg-3 col-md-6 col-sm-8">
+                            <div class="single-publication mt-30 text-center">
                                 <div class="image">
-                                    <img src="{{ asset('assets/' .$course->image_path) }}" alt="Course">
+                                    <img src="{{ asset('assets/' .$course->image_path) }}" alt="Publication">
+                                    <div class="add-cart">
+                                        <ul>
+                                            <li><a href="{{route('courses-details', $course->id)}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                            {{-- <li><a href="#"><i class="fa fa-heart-o"></i></a></li> --}}
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="price">
-                                    <span>{{ $course->discount}}%</span>
+                                <div class="content pt-10">
+                                    <h5 class="book-title"><a href="{{route('courses-details', $course->id)}}">{{$course->title}}</a></h5>
+                                    <p class="writer-name"><span></span>
+                                        {{-- {{ substr($course->description, 0, 70) }} ...    --}}
+                                    <p>
+                                    <div class="price-btn d-flex align-items-center justify-content-between">
+                                        <div class="price pt-20">
+                                            <span class="discount-price">₦{{ number_format($course->sale_price) }}</span>
+                                            <span class="normal-price">₦{{ number_format($course->new_price) }}</span>
+                                        </div>
+                                        <div class="button pt-10">
+                                            <a href="{{route('courses-details', $course->id)}}" class="main-btn">
+                                                <i class="fa fa-cart-plus"></i> Buy Now</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="cont">
-								<ul>
-									<li><h4>₦{{$course->new_price}}</h4></li>
-								</ul>
-								<span style="text-decoration: line-through;">₦{{$course->sale_price}}</span><br>
-								<a href="{{route('courses-details', $course->id)}}"><h4>{{$course->title}}</h4></a>
-								
-							</div>
-                        </div> <!-- single course -->
-                    </div>
+                            </div> <!-- single publication -->
+                        </div>
                     @empty
                         <p>No courses found</p>
                     @endforelse
@@ -66,7 +75,7 @@
                                 <div class="col-md-6">
                                     <div class="thum">
                                         <div class="image">
-                                            <img src="images/course/cu-1.jpg" alt="Course">
+                                            <img src="{{ asset('uassets/images/course/cu-1.jpg')}}" alt="Course">
                                         </div>
                                         <div class="price">
                                             <span>Free</span>

@@ -49,7 +49,7 @@
 
               <div class="form-group ">
                   <label class="control-label">Course Image</label><br>
-                  <img src="{{ asset('assets/' .$course->image_path) }}" alt="{{ $course->title }}" class="img-fluid">
+                  <img style="width: 80px" src="{{ asset('assets/' .$course->image_path) }}" alt="{{ $course->title }}" class="img-fluid">
 
                   <input type="file" name="image" class="form-control border ps-2" >
               </div>
@@ -57,19 +57,28 @@
 
               <div class="form-group ">
                   <label class="control-label">Upload Course Material</label><br>
-                  <a href="{{ route('courses.download', $course->id) }}" class="btn btn-success">Download Material</a>
+                  @if ($course->material_path == 'course_materials/')
+                  <p class="text-danger"> No Material selected</p>
+                  @else
+                  <a href="{{ route('courses.download', $course->material_path) }}" class="btn btn-success">Download Material</a>
+                 
+                  @endif
                   <input type="file" name="course_material" class="form-control border ps-2" >
               </div>
               <small class="text-danger mb-2">You can upload PDFs, documents, or presentaions</small>
 
               <div class="form-group">
                 <label for="video" class="control-label">Select Video:</label>
+                @if ($course->course_video == 'course_video/')
+                  <p class="text-danger"> No Video selected</p>
+                @else
                 <video controls width="40%" height="auto">
                     @foreach (['mp4', 'webm', 'ogg','mkv'] as $format)
-                        <source src="{{ asset('assets/'.$course->course_video . '.' . $format) }}" type="video/{{ $format }}">
+                        <source src="{{ asset($course->course_video) }}" type="video/{{ $format }}">
                     @endforeach
                     Your browser does not support the video tag.
                 </video>
+                @endif
                 <input type="file" name="course_video" id="course_video" accept=".mp4, .avi, .mpeg, .mov" class="form-control border ps-2" >
               </div>
               <small class="text-danger mb-2">You can upload Video</small>

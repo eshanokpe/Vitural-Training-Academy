@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('{{ asset('images/queues-at-BRT.jpg')}}');">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('{{ asset('uassets/images/gallery/1.jpg')}}');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
             <div class="row">
@@ -49,10 +49,10 @@
                                 <a href="{{ route('password.request') }}" class="text-primary text-gradient font-weight-bold">Reset password</a>
                             </p>
                         @endif --}}
-                        <p class="mt-4 text-sm text-center">
+                        {{-- <p class="mt-4 text-sm text-center">
                             Don't have an account?
                             <a href="{{ url('register')}}" class="text-primary text-gradient font-weight-bold">Sign up</a>
-                        </p>
+                        </p> --}}
                     </form>
                 </div>
                 </div>

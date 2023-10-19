@@ -37,7 +37,7 @@ class CoursesController extends Controller
         ->get();
         $categories = Category::all();
                
-        return view('admin.courses')->compact('courses', 'categories');
+        return view('admin.courses', compact('courses', 'categories'));
     }
 
     /**
@@ -59,7 +59,8 @@ class CoursesController extends Controller
             'description' => 'required|string',
             'new_price' => 'required|int',
             'sale_price' => 'required|int',
-            'course_video' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-matroska|max:704800', // Adjust the validation rules as needed
+            'course_video' => 'nullable|file|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-matroska|max:704800',
+           // 'course_video' => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-matroska|max:704800', // Adjust the validation rules as needed
             'category' => 'required|string',
             'image' => 'required|image|mimes:jpg,jpeg,png,pdf|max:2048', // Adjust the file types and size as needed
             'course_material' => 'nullable|mimes:pdf,doc,docx,ppt,pptx|max:20480', // Adjust the file types and size as needed
@@ -69,14 +70,23 @@ class CoursesController extends Controller
         $imagePath = null;
         $materialPath = null;
         
-
-        if($request->hasFile('course_video')){
-            // Store the uploaded video in the "public" disk
-            
-            $file = $request->file('course_video');
-            $videoPath =  time() . '.' .$file->getClientOriginalExtension();
-            $file->move(public_path('assets/course_video'.  $videoPath ));
+        if ($request->hasFile('course_video'))
+        {
+            $path = $request->file('course_video')->store('assets/course_video', ['disk' =>      'my_files']);
+           
+        }else{
+            $videoPath = '';
         }
+
+        // if($request->hasFile('course_video')){
+        //     // Store the uploaded video in the "public" disk
+            
+        //     $file = $request->file('course_video');
+        //     $videoPath =  time() . '.' .$file->getClientOriginalExtension();
+        //     $file->move(public_path('assets/course_video'.  $videoPath ));
+        // }else{
+        //     $videoPath = '';
+        // }
 
         if ($request->hasFile('image')) {
             $uploadedImage = $request->file('image');
@@ -110,10 +120,9 @@ class CoursesController extends Controller
         $course->category = $request->input('category');
         $course->image_path = 'course_images/'.$imagePath;
         $course->material_path = 'course_materials/' .$materialPath;
-        $course->course_video = 'course_video/'. $videoPath;
+        //$course->course_video = 'course_video/'. $videoPath;
+        $course->course_video = $path;
         $course->discount = (($request->new_price - $request->sale_price) / $request->new_price) * 100;
-            
-
         $course->save();
         
         // Redirect back with a success message

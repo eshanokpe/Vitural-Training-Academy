@@ -84,7 +84,7 @@
                             </div> <!-- social -->
                             <div class="login-register">
                                 <ul>
-                                    <li><a href="{{ route('login') }}">Login</a></li>
+                                    <li><a href="{{ route('admin.login') }}">Login</a></li>
                                     <li><a href="{{ route('register') }}">Register</a></li>
                                 </ul>
                             </div>

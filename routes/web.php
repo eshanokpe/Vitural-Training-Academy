@@ -12,6 +12,7 @@ use App\Http\Controllers\CargosController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TripsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -81,6 +82,10 @@ Route::get('/print/{type}/{id}', [PaymentController::class, 'print'])->name('pri
 
 // Authenticaton routes
 Auth::routes();
+
+//Route::post('/admin', [TripsController::class, 'store'])->name('admin.login');
+Route::get('/adminlogin', [LoginController::class, 'showLoginForm'])->name('admin.login');
+
 
 // Dashboard route
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');

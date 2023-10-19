@@ -230,45 +230,9 @@
                     </div> <!-- products btn -->
                 </div>
             </div> <!-- row -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-start">
                 @foreach ($courses as $course)
-                    {{-- <div class="col-lg-3 col-md-6 col-sm-8">
-                        <div class="single-course">
-                            <div class="thum">
-                                <div class="image">
-                                    <img src="{{ asset('assets/' .$course->image_path) }}" alt="Course">
-                                </div>
-                                <div class="price">
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <ul>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                </ul>
-                                <span>(20 Reviews)</span>
-                                <a href="courses-single.html"><h4>Learn basic javascript from start for beginner</h4></a>
-                                <div class="course-teacher">
-                                    <div class="thum">
-                                        <a href="#"><img src="images/course/teacher/t-1.jpg" alt="teacher"></a>
-                                    </div>
-                                    <div class="name">
-                                        <a href="#"><h6>Mark anthem</h6></a>
-                                    </div>
-                                    <div class="admin">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- single course -->
-                    </div> --}}
+                   
                     <div class="col-lg-3 col-md-6 col-sm-8">
                         <div class="single-publication mt-30 text-center">
                             <div class="image">
@@ -283,12 +247,12 @@
                             <div class="content pt-10">
                                 <h5 class="book-title"><a href="{{route('courses-details', $course->id)}}">{{$course->title}}</a></h5>
                                 <p class="writer-name"><span></span>
-                                    {{ substr($course->description, 0, 70) }} ...   
+                                    {{-- {{ substr($course->description, 0, 70) }} ...    --}}
                                 <p>
                                 <div class="price-btn d-flex align-items-center justify-content-between">
                                     <div class="price pt-20">
-                                        <span class="discount-price">₦{{$course->sale_price}}</span>
-                                        <span class="normal-price">₦{{$course->new_price}}</span>
+                                        <span class="discount-price">₦{{ number_format($course->sale_price) }}</span>
+                                        <span class="normal-price">₦{{number_format( $course->new_price)}}</span>
                                     </div>
                                     <div class="button pt-10">
                                         <a href="{{route('courses-details', $course->id)}}" class="main-btn">

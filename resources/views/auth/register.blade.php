@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
             <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" 
-            style="background-image: url('{{ asset('images/interior-1.jpg')}}'); background-size: cover;">
+            style="background-image: url('{{ asset('uassets/images/gallery/2.jpg')}}'); background-size: cover;">
             </div>
             </div>
             <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">

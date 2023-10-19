@@ -5,11 +5,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>
-  BRT Transport Mgt System
+  <title> 
+    Hair Kulture Academy
   </title>
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+ <!--====== Favicon Icon ======-->
+ <link rel="shortcut icon" href="{{ asset('uassets/images/fav.png')}}" type="image/png">
   <!-- Nucleo Icons -->
   <link href="{{ asset('assets/css/nucleo-icons.css')}}" rel="stylesheet" />
   <link href="{{ asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
@@ -31,7 +31,7 @@
           <nav class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
             <div class="container-fluid ps-2 pe-0">
               <a href="/" class="navbar-brand font-weight-bolder ms-lg-0 ms-3">
-                BRT Transport Management System
+                Hair Kulture Academy
               </a>
               <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon mt-2">

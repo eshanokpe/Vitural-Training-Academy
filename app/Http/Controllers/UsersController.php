@@ -43,8 +43,7 @@ class UsersController extends Controller
         }
         
         return view('admin.users')->with('users', $users);
-    }
-
+    } 
     /**
      * Store a newly created user in storage.
      *
